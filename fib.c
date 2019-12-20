@@ -1,5 +1,8 @@
 /* Author : Youssef Dahab
-File name: fib.c */
+macID : dahaby
+student number : 400114524
+File name: fib.c
+Assignment 4 Problem 1 (20 Points) */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -20,7 +23,7 @@ int draw(int x, int y, direction dir, int step, int w, int h, RGB *im, RGB c);
 
 int fib(int n, int x, int y, int step, RGB bc, RGB fc, int w, int h, RGB *image)
 {
-	/*calculate the nth fibonacci number fn. Ex: the 12th fibonacci in the 
+	/* calculate the nth fibonacci number fn. Ex: the 12th fibonacci in the 
     fibonacci sequence is 144 */
 
     unsigned long int fn_minus_2, fn_minus_1 = 0, fn = 1;
