@@ -1,4 +1,4 @@
-/* Author : Youssef Dahab
+/* Authr : Youssef Dahab
 File name: fib.c */
 
 #include <stdio.h>
