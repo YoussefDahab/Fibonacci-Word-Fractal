@@ -1,8 +1,5 @@
 /* Author : Youssef Dahab
-macID : dahaby
-student number : 400114524
-File name: fib.c
-Assignment 4 Problem 1 (20 Points) */
+File name: fib.c */
 
 #include "bmp.h"
 #include <stdio.h>
@@ -11,8 +8,8 @@ Assignment 4 Problem 1 (20 Points) */
 
 #define I(x, y) im[x + (y)*w]
 
-typedef enum {
-
+typedef enum 
+{
   up,
   down,
   left,
@@ -21,26 +18,26 @@ typedef enum {
 
 int draw(int x, int y, direction dir, int step, int w, int h, RGB *im, RGB c);
 
-int fib(int n, int x, int y, int step, RGB bc, RGB fc, int w, int h,
-        RGB *image) {
+int fib(int n, int x, int y, int step, RGB bc, RGB fc, int w, int h, RGB *image) 
+{
   /* calculate the nth fibonacci number fn. Ex: the 12th fibonacci in the
-fibonacci sequence is 144 */
+  fibonacci sequence is 144 */
 
   unsigned long int fn_minus_2, fn_minus_1 = 0, fn = 1;
   int i;
 
-  for (i = 1; i < n; i++) {
+  for (i = 1; i < n; i++) 
+  {
     fn_minus_2 = fn_minus_1;
     fn_minus_1 = fn;
     fn = fn_minus_2 + fn_minus_1;
   }
 
-  /* ####################################################################################
-   */
+  /* #################################################################################### */
 
   /* Ex: So now I now that the fiboacci word (string) is
-of length 144 so I allocate memory of size 144 + 1 ('\0') to store the
-fibonacci word (string) in */
+  of length 144 so I allocate memory of size 144 + 1 ('\0') to store the
+  fibonacci word (string) in */
 
   char *nth_fib_word = malloc(1 + sizeof(char) * fn);
   if (nth_fib_word == NULL)
@@ -56,7 +53,8 @@ fibonacci word (string) in */
   int prev_len = 1;
   int j;
 
-  for (i = 4; i <= n; i++) {
+  for (i = 4; i <= n; i++) 
+  {
     for (j = 0; j < prev_len; j++)
       *(nth_fib_word + strlen(nth_fib_word)) = *(nth_fib_word + j);
 
@@ -65,8 +63,7 @@ fibonacci word (string) in */
 
   nth_fib_word[fn + 1] = '\0';
 
-  /* ####################################################################################
-   */
+  /* #################################################################################### */
 
   /* Set the screen background color */
   for (i = 0; i < w * h; i++)
@@ -75,27 +72,34 @@ fibonacci word (string) in */
   int k;              /* position k */
   direction dir = up; /* initially go up */
 
-  for (i = 0, k = 1; i < fn; i++, k++) {
-    if (y * w + x > w * h || y * w + x < 0) {
+  for (i = 0, k = 1; i < fn; i++, k++) 
+  {
+    if (y * w + x > w * h || y * w + x < 0) 
+    {
       printf("Coordinates outside image window\n");
       return 0;
     }
 
     draw(x, y, dir, step, w, h, image, fc);
 
-    if (nth_fib_word[i] == '0') {
-      if (k % 2 == 0) {
-        if (dir == up) {
+    if (nth_fib_word[i] == '0') 
+    {
+      if (k % 2 == 0) 
+      {
+        if (dir == up) 
+        {
           y += step;
           dir = left;
         }
 
-        else if (dir == left) {
+        else if (dir == left) 
+        {
           x -= step;
           dir = down;
         }
 
-        else if (dir == down) {
+        else if (dir == down) 
+        {
           y -= step;
           dir = right;
         }
@@ -108,17 +112,20 @@ fibonacci word (string) in */
       }
 
       else {
-        if (dir == up) {
+        if (dir == up) 
+        {
           y += step;
           dir = right;
         }
 
-        else if (dir == right) {
+        else if (dir == right) 
+        {
           x += step;
           dir = down;
         }
 
-        else if (dir == down) {
+        else if (dir == down) 
+        {
           y -= step;
           dir = left;
         }
@@ -146,27 +153,34 @@ fibonacci word (string) in */
   return fn;
 }
 
-int draw(int x, int y, direction dir, int step, int w, int h, RGB *im, RGB c) {
+int draw(int x, int y, direction dir, int step, int w, int h, RGB *im, RGB c) 
+{
   int j;
 
-  if (dir == up) {
-    for (j = 0; j < step; j++) {
+  if (dir == up) 
+  {
+    for (j = 0; j < step; j++) 
+    {
       if ((y + j) * w + x > w * h || (y + j) * w + x < 0)
         return 0;
       I(x, y + j) = c; /* im[(y + j) * w + x]= c; */
     }
   }
 
-  if (dir == down) {
-    for (j = 0; j < step; j++) {
+  if (dir == down) 
+  {
+    for (j = 0; j < step; j++) 
+    {
       if ((y - j) * w + x > w * h || (y - j) * w + x < 0)
         return 0;
       I(x, y - j) = c; /* im[(y - j) * w + x]= c; */
     }
   }
 
-  if (dir == right) {
-    for (j = 0; j < step; j++) {
+  if (dir == right) 
+  {
+    for (j = 0; j < step; j++) 
+    {
       if (y * w + (x + j) > w * h || y * w + (x + j) < 0)
         return 0;
       I(x + j, y) = c; /* im[y * w + (x + j)]= c; */
@@ -174,7 +188,8 @@ int draw(int x, int y, direction dir, int step, int w, int h, RGB *im, RGB c) {
   }
 
   if (dir == left)
-    for (j = 0; j < step; j++) {
+    for (j = 0; j < step; j++) 
+    {
       if (y * w + (x - j) > w * h || y * w + (x - j) < 0)
         return 0;
       I(x - j, y) = c; /* im[y * w + (x - j)]= c; */
