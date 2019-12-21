@@ -28,9 +28,9 @@ int fib(int n, int x, int y, int step, RGB bc, RGB fc, int w, int h, RGB *image)
 
     for (i = 1; i < n; i++) 
     {
-      fn_minus_2 = fn_minus_1;
-      fn_minus_1 = fn;
-      fn = fn_minus_2 + fn_minus_1;
+        fn_minus_2 = fn_minus_1;
+        fn_minus_1 = fn;
+        fn = fn_minus_2 + fn_minus_1;
     }
 
     /* #################################################################################### */
@@ -41,7 +41,7 @@ int fib(int n, int x, int y, int step, RGB bc, RGB fc, int w, int h, RGB *image)
 
     char *nth_fib_word = malloc(1 + sizeof(char) * fn);
     if (nth_fib_word == NULL)
-      return 0;
+        return 0;
 
     nth_fib_word[0] = '0';
     nth_fib_word[1] = '1'; /* Now I have f3 which is '01' */
@@ -55,10 +55,10 @@ int fib(int n, int x, int y, int step, RGB bc, RGB fc, int w, int h, RGB *image)
 
     for (i = 4; i <= n; i++) 
     {
-      for (j = 0; j < prev_len; j++)
-        *(nth_fib_word + strlen(nth_fib_word)) = *(nth_fib_word + j);
+        for (j = 0; j < prev_len; j++)
+          *(nth_fib_word + strlen(nth_fib_word)) = *(nth_fib_word + j);
 
-      prev_len = strlen(nth_fib_word) - prev_len;
+        prev_len = strlen(nth_fib_word) - prev_len;
     }
 
     nth_fib_word[fn + 1] = '\0';
@@ -67,30 +67,33 @@ int fib(int n, int x, int y, int step, RGB bc, RGB fc, int w, int h, RGB *image)
 
     /* Set the screen background color */
     for (i = 0; i < w * h; i++)
-      image[i] = bc;
+        image[i] = bc;
 
     int k;              /* position k */
     direction dir = up; /* initially go up */
 
     for (i = 0, k = 1; i < fn; i++, k++) 
     {
-      if (y * w + x > w * h || y * w + x < 0) 
-      {
-        printf("Coordinates outside image window\n");
-        return 0;
-      }
-
-      draw(x, y, dir, step, w, h, image, fc);
-
-      if (nth_fib_word[i] == '0') 
-      {
-        if (k % 2 == 0) 
+        if (y * w + x > w * h || y * w + x < 0) 
         {
-          if (dir == up) 
+          printf("Coordinates outside image window\n");
+          return 0;
+        }
+
+        draw(x, y, dir, step, w, h, image, fc);
+
+        if (nth_fib_word[i] == '0') 
+        {
+            if (k % 2 == 0) 
           {
-            y += step;
-            dir = left;
-          }
+                
+          
+              if (dir == up) 
+              {
+                  
+                y += step;
+                dir = left;
+              }
 
           else if (dir == left) 
           {
@@ -111,47 +114,49 @@ int fib(int n, int x, int y, int step, RGB bc, RGB fc, int w, int h, RGB *image)
           }
         }
 
-        else {
-          if (dir == up) 
-          {
-            y += step;
-            dir = right;
-          }
+        else 
+        {
+            if (dir == up) 
+            {
+              y += step;
+              dir = right;
+            }
 
-          else if (dir == right) 
-          {
+            else if (dir == right) 
+            {
+              x += step;
+              dir = down;
+            }
+
+            else if (dir == down) 
+            {
+              y -= step;
+              dir = left;
+            }
+
+            else /* if (dir == left) */
+            {
+              x -= step;
+              dir = up;
+            }
+          }
+        }
+
+      else 
+      {
+          if (dir == right)
             x += step;
-            dir = down;
-          }
-
-          else if (dir == down) 
-          {
-            y -= step;
-            dir = left;
-          }
-
-          else /* if (dir == left) */
-          {
+          else if (dir == left)
             x -= step;
-            dir = up;
-          }
+          else if (dir == up)
+            y += step;
+          else /*if (dir == down)*/
+            y -= step;
         }
       }
 
-      else {
-        if (dir == right)
-          x += step;
-        else if (dir == left)
-          x -= step;
-        else if (dir == up)
-          y += step;
-        else /*if (dir == down)*/
-          y -= step;
-      }
+      return fn;
     }
-
-    return fn;
-  }
 
 int draw(int x, int y, direction dir, int step, int w, int h, RGB *im, RGB c) 
 {
