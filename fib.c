@@ -10,7 +10,6 @@ File name: fib.c */
 
 typedef enum
 {
-	
 	up,
 	down,
 	left,
