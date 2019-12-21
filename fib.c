@@ -1,8 +1,5 @@
 /* Author : Youssef Dahab
-macID : dahaby
-student number : 400114524
-File name: fib.c
-Assignment 4 Problem 1 (20 Points) */
+File name: fib.c */
 
 #include <stdio.h>
 #include <stdlib.h>
