@@ -22,9 +22,9 @@ int draw(int x, int y, direction dir, int step, int w, int h, RGB *im, RGB c);
 int fib(int n, int x, int y, int step, RGB bc, RGB fc, int w, int h, RGB *image)
 {
 	/* calculate the nth fibonacci number fn. Ex: the 12th fibonacci in the 
-    fibonacci sequence is 144 */
+        fibonacci sequence is 144 */
 
-    unsigned long int fn_minus_2, fn_minus_1 = 0, fn = 1;
+        unsigned long int fn_minus_2, fn_minus_1 = 0, fn = 1;
 	int i;
 
 	for (i = 1; i < n; i++)
@@ -37,8 +37,8 @@ int fib(int n, int x, int y, int step, RGB bc, RGB fc, int w, int h, RGB *image)
 	/* #################################################################################### */
 
 	/* Ex: So now I now that the fiboacci word (string) is 
-    of length 144 so I allocate memory of size 144 + 1 ('\0') to store the 
-    fibonacci word (string) in */
+        of length 144 so I allocate memory of size 144 + 1 ('\0') to store the 
+        fibonacci word (string) in */
 
 	char *nth_fib_word = malloc(1 + sizeof(char) * fn);
 	if (nth_fib_word == NULL) return 0;
