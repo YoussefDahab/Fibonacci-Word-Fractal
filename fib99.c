@@ -10,10 +10,10 @@ File name: fib.c */
 
 typedef enum 
 {
-  up,
-  down,
-  left,
-  right
+    up,
+    down,
+    left,
+    right
 } direction;
 
 int draw(int x, int y, direction dir, int step, int w, int h, RGB *im, RGB c);
